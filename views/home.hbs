@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ pageTitle }}</title>
+</head>
+<body>
+    {{> header }}
+
+    <!--Se pueden paras parametros a un HELPER de esta forma, además se pueden pasar  otros componentes como parametros como en este caso-->
+    <p>{{ screamIt welcomeMessage  }}</p>
+
+    <p>{{ screamIt 'this is a fucking great test'}}</p>
+
+    <!-- Se inyecta el elemento footer-->
+   {{> footer }}
+
+</body>
+</html>
