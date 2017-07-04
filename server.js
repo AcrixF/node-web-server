@@ -7,17 +7,21 @@ const fs = require('fs');
 
 var app = express();
 
-//Se define el motor de vistas de hbs
-app.set('view engine', 'hbs');
-
 //Se definen la ruta donde se encontraran las vistas de los .hbs
 hbs.registerPartials(__dirname + '/views/partials');
+
+//Se define el motor de vistas de hbs
+app.set('view engine', 'hbs');
 
 //al utilizar el método de use de la variable app se comienzan a definir las propiedades MIDDLEWARE
 app.use((request, response, next) => {
 	var now = new Date();
-	var log = `Date: ${ now.toString()}, Method: ${request.method} , URL:  ${request.url}`;
-	fs.appendFile('server.log', log + `\n` , error => { if (error) console.log(' Unable to append to server log...')});
+	var log = `Date: ${ now.toString() }, Method: ${ request.method } , URL:  ${ request.url }`;
+	
+	fs.appendFile('server.log', log + `\n` , error => {
+		if (error)
+			console.log(' Unable to append to server log...');
+	});
 	
 	//console.log( `${ now } : ${request.method} , ${request.url}`);
 	next();
@@ -25,7 +29,6 @@ app.use((request, response, next) => {
 
 app.use( (request, response, next) => {
 	response.render('maintenance.hbs');
-	next();
 });
 
 //Se declara la ruta donde se encontraran las vistas en HTML
